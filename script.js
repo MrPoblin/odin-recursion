@@ -29,3 +29,44 @@ function fibsRec(n, arr = []){
     arr.push(arr[n-1] + arr[n-2]);
     return(fibs(n, arr));
 }
+
+function mergeSort(array) {
+    if(array.length == 1){
+        return array;
+    }
+
+    let leftLength = Math.trunc(array.length / 2);
+    let rightLength = array.length - leftLength;
+
+    let leftArray = mergeSort(array.slice(0, leftLength));
+    let rightArray = mergeSort(array.slice(leftLength, array.length));
+
+    let lIndex = 0;
+    let rIndex = 0;
+
+    let mergedArray = [];
+
+    while(lIndex < leftLength && rIndex < rightLength){
+        if(leftArray[lIndex] <= rightArray[rIndex]){
+            mergedArray.push(leftArray[lIndex]);
+            lIndex += 1;
+        }
+        else{
+            mergedArray.push(rightArray[rIndex]);
+            rIndex += 1;
+        }
+    }
+    
+    while(lIndex < leftLength){
+        mergedArray.push(leftArray[lIndex]);
+        lIndex += 1;
+    }
+    while(rIndex < rightLength){
+        mergedArray.push(rightArray[rIndex]);
+        rIndex += 1;
+    }
+
+    return mergedArray;
+}
+
+
